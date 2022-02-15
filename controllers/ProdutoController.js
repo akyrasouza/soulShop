@@ -19,7 +19,8 @@ class ProdutoController{
 
     static async addProduto(req, res){
         const {name, price, description, quantity} = req.body;
-        const produto = Produto({name, price, description, quantity});
+        const image = req.file?.publicUrl;
+        const produto = Produto({name, price, description, quantity,image});
         await produto.save(); //solicitação remota ao banco
 
         res.redirect("/produtos")
@@ -33,8 +34,14 @@ class ProdutoController{
 
     static async editProduto(req, res){
         const {id, name, price, description, quantity} = req.body;
+        const file = req.file
+        let produto = {id, name, price, description, quantity}
+        if(file){
+            const image = file.publicUrl
+            produto = {...produto, image}
+        }
 
-        await Produto.findByIdAndUpdate(id, {name, price, description, quantity});
+        await Produto.findByIdAndUpdate(id, produto);
 
         res.redirect("/produtos");
 

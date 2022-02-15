@@ -8,6 +8,7 @@ const Produto = model(
         price: {type: Number, required: true},
         description: {type: String, required: true},
         quantity: {type: Number, required: true},  
+        image: {type: String},
     })
 );
 
