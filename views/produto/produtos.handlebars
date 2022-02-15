@@ -21,7 +21,11 @@
           {{#each produtos}}
           <tr>
             <td>
+              {{#if this.image}}
               <img src="{{this.image}}" alt="Product Image" width="72">
+              {{else}}
+              <img src="../../img/produto.png" alt="Placeholder" width="72">
+              {{/if}}
             </td>
             <td>{{this.name}}</td>
             <td>{{this.price}} </td>
